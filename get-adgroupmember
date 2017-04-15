@@ -1,1 +1,1 @@
-get-adgroupmember -Identity [group name]
+get-adgroupmember -Identity [group name] | Select-Object Name | Export-CSV -Path [path]
