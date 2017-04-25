@@ -1,0 +1,1 @@
+Get-ADUser -Filter * -SearchBase "OU=<OU Name>,DC=pepindist,DC=COM" | Select name | Export-csv -Path C:\Users\sward\<location>
