@@ -1,0 +1,1 @@
+Get-ADGroupMember -identity “Name of Group” | select name | Export-csv -path C:\Output\Groupmembers.csv -NoTypeInformation
