@@ -1,0 +1,7 @@
+#CREATES AN EXCHANGE ONLINE SESSION
+$UserCredential = Get-Credential
+$ExchangeSession =  New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://outlook.office365.com/powershell-liveid/ -Credential $UserCredential -Authentication Basic -AllowRedirection
+
+#IMPORT SESSION COMMANDS
+Import-PsSession $ExchangeSession  -AllowClobber
+connect-MsolService
