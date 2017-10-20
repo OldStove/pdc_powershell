@@ -1,0 +1,63 @@
+#Login in to Mobility Website and Create User
+
+# Variables
+$loginUrl = "40908.mobilitysellsbeer.net";
+$username = "sward";
+$passw = '$wardMOB1';
+$EmployeesUrl = 'https://40908.mobilitysellsbeer.net/DCS81519/MaintainEmployees.aspx?PageNumber=7.17.0'
+$AddEmployeeUrl = 'https://40908.mobilitysellsbeer.net/DCS81519/maintainemployeedetails.aspx?mode=ADD&PageNumber=7.17.0'
+
+# Get New Employee Properties
+#$NewEmployeeName = Read-Host -Prompt "Type Employee name (Ex. First last):"
+$NewEmployeeName = "Test User"
+#$NewEmployeeID = Read-Host -Prompt "Type Employee ID (Ex. FLast):"
+$NewEmployeeID = "Tuser"
+$NewEmployeePassw = "Pepin4121"
+$NewEmployeeLoginID = $NewEmployeeID
+$NewEmployeeEmail = $NewEmployeeLoginID+"@teampepin.com"
+#$NewEmployeeCell = Read-Host -Prompt "Enter New Employee's number (Ex. 813-xxx-xxxx):"
+$NewEmployeeCell = '813-123-4567' 
+
+
+
+# Initialize Browser
+$ie = New-Object -ComObject internetexplorer.application;
+$ie.visible = $true;
+$ie.navigate($loginUrl);
+while ($ie.Busy -eq $true) { Start-Sleep -Seconds 1;} # Wait for Browser to idle
+
+
+
+# Login
+($ie.document.getElementsByName("txtName") | select -First 1).value = $username;
+($ie.document.getElementsByName("txtPassword") | select -First 1).value = $passw;
+($ie.document.getElementsByName("btnLogin") |select -first 1).click();
+while ($ie.Busy -eq $true) { Start-Sleep -Seconds 1;} # Wait for Browser to idle
+
+
+
+# Expand Menu item: System Maintenance
+#($ie.document.getElementsByTagName("") |select -first 1).click();
+
+
+
+# Launch Employees Page
+$ie.navigate($EmployeesUrl);
+while ($ie.Busy -eq $true) { Start-Sleep -Seconds 1;} # Wait for Browser to idle
+
+
+
+# Launch Add Employee Page
+$ie.navigate($AddEmployeeUrl);
+while ($ie.Busy -eq $true) { Start-Sleep -Seconds 1;} # Wait for Browser to idle
+
+
+
+# get Document Variables
+($ie.document.IHTMLDocument3_getElementsByTagName("input") | Select-Object Type,Name);
+#($ie.document.IHTMLDocument3_getElementsByID("input") | Select-Object Type,Name);
+
+
+
+# Fill New Employee Properties in Boxes
+#($ie.document.getElementsByTagName('ctl00$MainContent$txtEmployeeName') | select -First 1).input = $NewEmployeeName;
