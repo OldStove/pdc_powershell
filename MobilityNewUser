@@ -8,16 +8,12 @@ $EmployeesUrl = 'https://40908.mobilitysellsbeer.net/DCS81519/MaintainEmployees.
 $AddEmployeeUrl = 'https://40908.mobilitysellsbeer.net/DCS81519/maintainemployeedetails.aspx?mode=ADD&PageNumber=7.17.0'
 
 # Get New Employee Properties
-#$NewEmployeeName = Read-Host -Prompt "Type Employee name (Ex. First last):"
-$NewEmployeeName = "Test User"
-#$NewEmployeeID = Read-Host -Prompt "Type Employee ID (Ex. FLast):"
-$NewEmployeeID = "Tuser"
+$NewEmployeeName = Read-Host -Prompt "Type Employee name (Ex. First last):"
+$NewEmployeeID = Read-Host -Prompt "Type Employee ID (Ex. FLast):"
+$NewEmployeeCell = Read-Host -Prompt "Enter New Employee's number (Ex. 813-xxx-xxxx):"
 $NewEmployeePassw = "Pepin4121"
 $NewEmployeeLoginID = $NewEmployeeID
 $NewEmployeeEmail = $NewEmployeeLoginID+"@teampepin.com"
-#$NewEmployeeCell = Read-Host -Prompt "Enter New Employee's number (Ex. 813-xxx-xxxx):"
-$NewEmployeeCell = '813-123-4567' 
-
 
 
 # Initialize Browser
@@ -54,10 +50,23 @@ while ($ie.Busy -eq $true) { Start-Sleep -Seconds 1;} # Wait for Browser to idle
 
 
 # get Document Variables
-($ie.document.IHTMLDocument3_getElementsByTagName("input") | Select-Object Type,Name);
-#($ie.document.IHTMLDocument3_getElementsByID("input") | Select-Object Type,Name);
+#ie.document.IHTMLDocument3_getElementsByTagName("input") | Select-Object Type,ID,Name);
 
 
 
 # Fill New Employee Properties in Boxes
-#($ie.document.getElementsByTagName('ctl00$MainContent$txtEmployeeName') | select -First 1).input = $NewEmployeeName;
+# Employee Name: First last
+$ie.document.IHTMLDocument3_getElementById('ctl00_MainContent_txtEmployeeName').value = $NewEmployeename;
+# Employee ID: Flast
+$ie.document.IHTMLDocument3_getElementById('ctl00_MainContent_txtEmployeeID').value = $NewEmployeeID;
+# Login ID: Flast
+$ie.document.IHTMLDocument3_getElementById('ctl00_MainContent_txtLogin').value = $NewEmployeeLoginID;
+# Password: Pepin4121
+$ie.document.IHTMLDocument3_getElementById('ctl00_MainContent_txtPassword').value = $NewEmployeePassw;
+# Email: flast@teampepin.com
+$ie.document.IHTMLDocument3_getElementById('ctl00_MainContent_txtEmail').value = $NewEmployeeEmail;
+# Cell Phone: xxx-xxx-xxxx
+$ie.document.IHTMLDocument3_getElementById('ctl00_MainContent_txtCellPhone').value = $NewEmployeeCell;
+
+
+## Functions ##
