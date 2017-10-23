@@ -1,0 +1,39 @@
+#Login in to Cell Control Website and Create User
+
+# Variables
+$CellControlUrl = "cellcontrol.com";
+$loginUrl = "https://account.cellcontrol.com/login.php"
+$username = "steveward";
+$passw = '$wardCC';
+
+
+# Get New Employee Properties
+#$NewEmployeeName = Read-Host -Prompt "Type Employee name (Ex. First last):"
+$NewEmployeeName = "Test User"
+#$NewEmployeeID = Read-Host -Prompt "Type Employee ID (Ex. FLast):"
+$NewEmployeeID = "Tuser"
+$NewEmployeePassw = "Pepin4121"
+$NewEmployeeLoginID = $NewEmployeeID
+$NewEmployeeEmail = $NewEmployeeLoginID+"@teampepin.com"
+#$NewEmployeeCell = Read-Host -Prompt "Enter New Employee's number (Ex. 813-xxx-xxxx):"
+$NewEmployeeCell = '813-123-4567' 
+
+
+# Initialize Browser
+$ie = New-Object -ComObject internetexplorer.application;
+$ie.visible = $true;
+$ie.navigate($CellControlUrl);
+while ($ie.Busy -eq $true) { Start-Sleep -Seconds 1;} # Wait for Browser to idle
+$ie.navigate($loginUrl);
+while ($ie.Busy -eq $true) { Start-Sleep -Seconds 1;} # Wait for Browser to idle
+
+# Login to Wesite
+($ie.document.IHTMLDocument3_getElementsByName("username") | select -First 1).value = $username;
+($ie.document.IHTMLDocument3_getElementsByName("password") | select -First 1).value = $passw;
+($ie.document.IHTMLDocument3_getElementsByTagName("input") | select Type,Name,ID);
+"-------------";
+"buttons"
+"-------------";
+($ie.document.IHTMLDocument3_getElementsByTagName("button") | select Type,Name,ID);
+
+
